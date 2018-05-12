@@ -29,6 +29,9 @@
 	
 	<context:component-scan base-package="kr.or.bit" />
 	
-	
+	<websocket:handlers>
+		<websocket:mapping handler="chat" path="/chat"/>
+	</websocket:handlers>
+	<beans:bean id= "chat" class= "socket.Chat" ></beans:bean>
 	
 </beans:beans>
