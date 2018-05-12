@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="NewFile.jsp">gg</a>
+	<a href="chat.htm">채팅 </a>
 </body>
 </html>
