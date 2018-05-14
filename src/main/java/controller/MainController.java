@@ -15,9 +15,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("chat.htm")
-	public String chat(String id, Model model) {
-		System.out.println("이름 " + id);
+	public String chat(String id, String select, Model model) {
 		model.addAttribute("id", id);
+		model.addAttribute("select", select);
 		return "chat";
 	}
 

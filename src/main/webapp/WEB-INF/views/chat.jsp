@@ -13,13 +13,10 @@
 	
 	function connect() {
 		wsocket = new WebSocket(
-				"ws://192.168.0.26:8090/bit/chat");
+				"ws://192.168.0.26:8090/bit/chat?select="+$("#select").val());
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
-		
-		
-	
 	}
 	function disconnect() {
 		wsocket.send(nickname+":" + "님이 퇴장하였습니다.");
@@ -72,13 +69,15 @@
 	.chat{
 		width: 40%;
 		height: 500px;
-		background-color: yellow	
+		background-color: yellow;
+		
 	}
 	
-	.chatext{
+	.chat-text{
 		width: 100%;
 		height: 100%;
-		background-color: transparent;	
+		background-color: transparent;	.
+		overflow-y: auto;
 	}
 	
 	.textinput{
@@ -95,9 +94,9 @@
 <div class="container-fluid" align="center" >
  	<div id="chatArea" class = "chat">
  		<div id ="chatMessageArea" class = "chat-text">
- 	
  		</div>
  	</div>
+ 	<input type = "hidden" value= "${select}" id ="select">
 	<input type = "hidden" value= "${id}" id ="nickname">
 	<input type ="text" id ="message" class ="textinput">	
 	<input type ="button" id ="sendBtn" class ="btn btn-default" value ="전송">

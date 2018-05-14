@@ -3,6 +3,7 @@ package socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketMessage;
@@ -11,33 +12,55 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class Chat extends TextWebSocketHandler{
 
-	private List<WebSocketSession> list = new ArrayList<WebSocketSession>();
+	private Map<String, List<WebSocketSession>> usermap = new HashMap();
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		list.add(session);
-		System.out.println("연결");
-		System.out.println("sessionid : " + session.getId());
-		System.out.println("AcceptedProtocol" + session.getAcceptedProtocol());
-		System.out.println("Uri" + session.getUri());
+		
+		
+		Map<String, Object> map = session.getAttributes();
+		String chatname = (String) map.get("select");
+		System.out.println("afterConnectionEstablished = " + chatname);
 	
-		
-	/*	for(WebSocketSession sess : list) {
-			sess.sendMessage("입장했어요 뿌잉뿌잉");
-		}*/
-		
+		if(usermap.containsKey(chatname)) {
+			usermap.get(chatname).add(session);
+			System.out.println("여기");
+		}else {
+			System.out.println("else");
+			List<WebSocketSession> list = new ArrayList<WebSocketSession>();
+			list.add(session);
+			usermap.put(chatname, list);
+		}
 	}
 
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+		String chatroom = null;
+		Map<String, Object> map = session.getAttributes();
 		
-		for(WebSocketSession sess : list) {
+		String chatname = (String) map.get("select");
+		System.out.println("handleMessage :" + chatname);
+		for(String key : usermap.keySet()) {
+			if(key ==chatname) {
+				chatroom = chatname;
+			}
+		}
+		
+		for (WebSocketSession sess : usermap.get(chatname)) {
 			sess.sendMessage(message);
 		}
+		
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		
 	}
+
+	@Override
+	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+		System.out.println(exception.getMessage());
+	}
+	
+	
 
 }
