@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="chat.htm">채팅 </a>
+
+
+	<form action="chat.htm">
+		닉네임 : <input type = "text" name = "id">
+		<input type ="submit" value =" 채팅방 입장">	
+	</form>
+
+	
 </body>
 </html>
