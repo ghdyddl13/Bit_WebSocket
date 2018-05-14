@@ -14,6 +14,7 @@
 		box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 	}
 	
+<<<<<<< HEAD
 	#roombtn {
 		background-color: #3399ff;
 	}
@@ -30,10 +31,11 @@
     </ul>
   </div>
 </nav>
-		<c:set var="list" value="${requestScope.list}"></c:set>
-		
+
 	<br>	
 	<div align="center">
+	<c:set var="list" value="${requestScope.list}"></c:set>
+	<div>
 		<form action="room.htm" method="post" id="frm2">
 			<label>Chatting Room Name</label>
 			<input type="text" name="roomname">
@@ -45,6 +47,9 @@
 		닉네임 : <input type="text" name="id" id="id">
 		<!-- <select name="select" id="selectroom"> -->
 		<div id="select">
+
+		<!-- <select name="select"> -->
+
 			<c:forEach var="room" items="${list}">
 				<option value="${room.roomno}">${room.roomname}</option>
 				<a href="chat.htm?id="+ $('#id').val()+"&select=${room.roomno}">
