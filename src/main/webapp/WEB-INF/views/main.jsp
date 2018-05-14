@@ -13,35 +13,49 @@
 		background-color: #3399ff;
 		box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 	}
+	
+	#roombtn {
+		background-color: #3399ff;
+	}
 </style>
 
 </head>
 <body>
-<nav id="header" class="navbar navbar-expand-sm bg-light navbar-light">
+<nav class="navbar navbar-default" id="header">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSocket</a>
+    </div>
+    <ul class="nav navbar-nav">
+    </ul>
+  </div>
 </nav>
 		<c:set var="list" value="${requestScope.list}"></c:set>
 		
-		
-	<div>
+	<br>	
+	<div align="center">
 		<form action="room.htm" method="post" id="frm2">
-			<label>Room Name </label><br>
+			<label>Chatting Room Name</label>
 			<input type="text" name="roomname">
-			<input type="submit" value="생성">
+			<input type="submit" id="roombtn" value="생성" class="btn">
 		</form>
-	</div>
+
 	
 	<form action="chat.htm">
-		닉네임 : <input type="text" name="id">
-		<select name="select">
-			<!-- <option value="apple">apple</option>
-			<option  value="banana">banana</option> -->
+		닉네임 : <input type="text" name="id" id="id">
+		<!-- <select name="select" id="selectroom"> -->
+		<div id="select">
 			<c:forEach var="room" items="${list}">
 				<option value="${room.roomno}">${room.roomname}</option>
+				<a href="chat.htm?id="+ $('#id').val()+"&select=${room.roomno}">
+				<input type="submit" value="채팅방 입장" id="roombtn" class="btn">
+				</a>
 			</c:forEach>
-		</select>
-		<input type="submit" value="채팅방 입장">
+		</div>
+		<!-- </select> -->
+		
 	</form>
-	
+	</div>	
 
 
 </body>
