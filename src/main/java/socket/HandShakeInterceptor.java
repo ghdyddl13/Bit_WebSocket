@@ -24,20 +24,11 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
     	HttpServletRequest req= ssreq.getServletRequest();
         System.out.println("Before Handshake");
         System.out.println(req.getParameter("select"));
+        
+        // 파라미터로 입력된 attributes에 put을 하면 
+        // WebSocketSession에 자동으로 저장되어 Chat class에서 활용 가능
         attributes.put("select", req.getParameter("select"));
-       /*   
-        ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
-        System.out.println("URI:"+request.getURI());
-  
-        HttpServletRequest req =  ssreq.getServletRequest();
- 
-        String userId = req.getParameter("userid");
-        System.out.println("param, id:"+userId);
-        attributes.put("userId", userId);
-  
-        // HttpSession 에 저장된 이용자의 아이디를 추출하는 경우
-        String nickname = (String)req.getSession().getAttribute("nickname");
-        attributes.put("nickname", nickname);*/
+     
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
   

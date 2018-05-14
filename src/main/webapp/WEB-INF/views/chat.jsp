@@ -100,6 +100,8 @@
 	<input type = "hidden" value= "${id}" id ="nickname">
 	<input type ="text" id ="message" class ="textinput">	
 	<input type ="button" id ="sendBtn" class ="btn btn-default" value ="전송">
+	<a href = "index.htm"><input type ="button" id = "exitBtn" class ="btn btn-default" value ="나가기"></a>
+	
 </div>		
  
  	
