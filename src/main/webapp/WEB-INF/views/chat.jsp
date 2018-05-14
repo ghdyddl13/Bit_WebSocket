@@ -13,13 +13,13 @@
 	
 	function connect() {
 		wsocket = new WebSocket(
-				"ws://192.168.0.45:8090/bit/chat?select="+$("#select").val());
+				"ws://192.168.0.35:8090/bit/chat?select="+$("#select").val());
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
 	}
 	function disconnect() {
-		wsocket.send(nickname+":" + "님이 퇴장하였습니다.");
+		wsocket.send($("#nickname").val() + " : " + "님이 퇴장하였습니다.");
 		wsocket.close();
 	}
 	function onOpen(evt) {
