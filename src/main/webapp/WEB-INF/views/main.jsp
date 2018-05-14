@@ -16,23 +16,34 @@
 	
 	#roombtn {
 		background-color: #3399ff;
+		box-shadow: 1px 1px 5px #000;
+		color: white;
 	}
 	
 table {
+	text-align: center;
     border-collapse: collapse;
     width: 30%;
+    margin: auto;
 }
 
 th, td {
-    text-align: left;
+    text-align: center;
     padding: 8px;
+    border-bottom: 1px solid #ddd;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even){
+	background-color: #f2f2f2;
+}
 
 th {
     background-color: #3399ff;
     color: white;
+}
+#loginimg {
+	height: 20px;
+	width: 20px;
 }
 </style>
 
@@ -43,8 +54,13 @@ th {
     <div class="navbar-header">
       <a class="navbar-brand" href="#">WebSocket</a>
     </div>
+    <img id="loginimg" alt="" src="https://dopl-egov.commerce.utah.gov/eGov/person%20image.png">
     <ul class="nav navbar-nav">
+        <li class="nav-item">
+     		<a class="nav-link" href="#">${nickname}</a>
+    	</li>
     </ul>
+    
   </div>
 </nav>
 
@@ -53,13 +69,13 @@ th {
 	<c:set var="list" value="${requestScope.list}"></c:set>
 	<div>
 		<form action="room.htm" method="post" id="frm2">
-			<label>Chatting Room Name</label>
+			<label><h5>Chatting Room Name</h5></label>
 			<input type="text" name="roomname">
 			<input type="submit" id="roombtn" value="생성" class="btn">
 		</form>
 
 		<div id="select">
-			<table class="table table-bordered table-sm">
+			<table>
 				<tr><th>채팅방이름</th><th>비고</th></tr>
 			<c:forEach var="room" items="${list}">
 
