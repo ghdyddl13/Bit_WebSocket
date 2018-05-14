@@ -5,9 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+</script><script type="text/javascript">
 
 	var wsocket;
 	
@@ -67,9 +69,10 @@
 
 <style type="text/css">
 	.chat{
-		width: 40%;
+		margin: 0px;
+		width: 100%;
 		height: 500px;
-		background-color: yellow;
+		background-color: #e6f2ff;
 		overflow-y: auto;
 	}
 	
@@ -81,12 +84,22 @@
 	.textinput{
 		width: 35%;
 	}
+	
+	#header{
+	  background-color: #3399ff;
+	  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+	}
+	
 </style>
 
 	
 </head>
 <body>
-
+<nav id ="header" class="navbar navbar-expand-sm navbar-fixed-top">
+ <ul class="navbar-nav">
+    <li>{select}</li>
+  </ul>
+</nav>
 
 
 <div class="container-fluid" align="center" >
