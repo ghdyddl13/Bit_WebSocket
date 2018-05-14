@@ -14,10 +14,26 @@
 		box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 	}
 	
-<<<<<<< HEAD
 	#roombtn {
 		background-color: #3399ff;
 	}
+	
+table {
+    border-collapse: collapse;
+    width: 30%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #3399ff;
+    color: white;
+}
 </style>
 
 </head>
@@ -42,25 +58,22 @@
 			<input type="submit" id="roombtn" value="생성" class="btn">
 		</form>
 
-	
-	<form action="chat.htm">
-		닉네임 : <input type="text" name="id" id="id">
-		<!-- <select name="select" id="selectroom"> -->
 		<div id="select">
-
-		<!-- <select name="select"> -->
-
+			<table class="table table-bordered table-sm">
+				<tr><th>채팅방이름</th><th>비고</th></tr>
 			<c:forEach var="room" items="${list}">
-				<option value="${room.roomno}">${room.roomname}</option>
-				<a href="chat.htm?id="+ $('#id').val()+"&select=${room.roomno}">
+
+				<tr><td><input type="hidden" value="${room.roomno}">${room.roomname}</td>
+				
+				<td><a href="chat.htm?select=${room.roomno}">
 				<input type="submit" value="채팅방 입장" id="roombtn" class="btn">
-				</a>
+				</a></td></tr>
+	
 			</c:forEach>
+			</table>
 		</div>
-		<!-- </select> -->
-		
-	</form>
 	</div>	
+</div>
 
 
 </body>
