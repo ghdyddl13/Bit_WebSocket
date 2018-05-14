@@ -50,7 +50,6 @@ public class Chat extends TextWebSocketHandler {
 			sess.sendMessage(message);
 		}
 	}
-	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		
@@ -59,11 +58,8 @@ public class Chat extends TextWebSocketHandler {
 		usermap.get(chatname).remove(session.getId());  // 채팅방에서 클라이언트라 접속을 끊으면, 참여중인 목록에서 session을 삭제한 후
 		session.close();								// session종료시키기
 	}
-
 	@Override
-	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		
-		
+	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {	
 	}
 	
 	

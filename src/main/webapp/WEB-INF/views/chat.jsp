@@ -13,7 +13,7 @@
 	
 	function connect() {
 		wsocket = new WebSocket(
-				"ws://192.168.0.26:8090/bit/chat?select="+$("#select").val());
+				"ws://192.168.0.45:8090/bit/chat?select="+$("#select").val());
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
@@ -49,19 +49,19 @@
 		$("#chatArea").scrollTop(maxScroll);
 	}
 
+
 	$(document).ready(function() {
 		connect();
 		$('#message').keypress(function(event){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if(keycode == '13'){
 				send();	
+				
 			}
 			event.stopPropagation();
 		});
 		$('#sendBtn').click(function() { send(); });
-	//	$('#enterBtn').click(function() { connect(); });
 		$('#exitBtn').click(function() { disconnect(); });
-		//wsocket.send(nickname+":" + "님이 입장하였습니다.");
 	});
 </script>
 
@@ -70,14 +70,12 @@
 		width: 40%;
 		height: 500px;
 		background-color: yellow;
-		
+		overflow-y: auto;
 	}
 	
 	.chat-text{
 		width: 100%;
-		height: 100%;
-		background-color: transparent;	.
-		overflow-y: auto;
+		background-color: transparent;
 	}
 	
 	.textinput{
@@ -92,7 +90,7 @@
 
 
 <div class="container-fluid" align="center" >
- 	<div id="chatArea" class = "chat">
+ 	<div id="chatArea" class = "chat" align="justify">
  		<div id ="chatMessageArea" class = "chat-text">
  		</div>
  	</div>
@@ -100,12 +98,7 @@
 	<input type = "hidden" value= "${id}" id ="nickname">
 	<input type ="text" id ="message" class ="textinput">	
 	<input type ="button" id ="sendBtn" class ="btn btn-default" value ="전송">
-	<a href = "index.htm"><input type ="button" id = "exitBtn" class ="btn btn-default" value ="나가기"></a>
-	
+	<a href = "index.htm"><input type ="button" id = "exitBtn" class ="btn btn-default" value ="나가기"></a>	
 </div>		
- 
- 	
- 
- 
 </body>
 </html>

@@ -42,6 +42,7 @@
 				class="socket.HandShakeInterceptor"></beans:bean>
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
+	
 	<beans:bean id="chat" class="socket.Chat"></beans:bean>
 
 </beans:beans>
