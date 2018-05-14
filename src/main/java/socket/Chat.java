@@ -56,7 +56,10 @@ public class Chat extends TextWebSocketHandler {
 		// 입장한 채팅방 이름 꺼내와 변수에 저장 
 		String chatname = getCurrentChatRoom(session);
 		usermap.get(chatname).remove(session.getId());  // 채팅방에서 클라이언트라 접속을 끊으면, 참여중인 목록에서 session을 삭제한 후
-		session.close();								// session종료시키기
+		session.close();
+		
+		
+		// session종료시키기
 	}
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {	
