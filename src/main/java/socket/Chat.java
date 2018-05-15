@@ -72,5 +72,7 @@ public class Chat extends TextWebSocketHandler {
 		
 		return (String) map.get("select");
 	}
+	
+
 
 }
