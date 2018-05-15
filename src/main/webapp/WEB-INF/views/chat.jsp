@@ -14,10 +14,12 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var wsocket;
-	var nickname;
+	
+	var nickname = "<%=session.getAttribute("nickname")%>"
 	function connect() {
+	
 		wsocket = new WebSocket(
-
+	
 		"ws://192.168.0.48:8090/bit/chat?select=" + $("#select").val());
 
 		wsocket.onopen = onOpen;
@@ -25,42 +27,47 @@
 		wsocket.onclose = onClose;
 	}
 	function disconnect() {
-		wsocket.send(nickname + "님이 퇴장하였습니다.");
 		wsocket.close();
+		window.close();
 	}
 	function onOpen(evt) {
 	}
 	function onMessage(evt) {
+		
 		var data = evt.data;
 
 		appendMessage(data);
 
 	}
 	function onClose(evt) {
-		;
+		
 	}
 
 	function send() {
 		var msg = $("#message").val();
-
-		wsocket.send(nickname + "|" + msg);
-
+		if(msg.trim()!=""){
+			wsocket.send(nickname + "|" + msg);
+		}
 		$("#message").val("");
 	}
 
 	function appendMessage(msg) {
 		var strarray = msg.split('|');
 
-		var sendusernickname = strarray[0];
+		var msginfo = strarray[0];
+		console.log(">"+msginfo+"<")
 		var message = strarray[1];
 		var msgbox;
-		if (sendusernickname == nickname) {
+		if (msginfo == nickname) {
 			msgbox = '<div class = "message-wrapper container-fluid" align="right">'
 			msgbox += '<div class= "message-textbox mymessage"  align="left">'
 					+ message + '</div></div>'
-		} else {
-			msgbox = '<div class = "message-wrapper container-fluid">'
-					+ sendusernickname
+		}else if(msginfo == "알림"){
+			console.log("알림에 걸림")
+			msgbox = '<div class = "text-inform message-wrapper" align="center"> ---------'+message+' ---------<div>'
+		}else {
+			msgbox = '<div class = "message-wrapper container-fluid" >'
+					+ msginfo
 
 			msgbox += '<br><div class= "message-textbox othermessage">'
 					+ message + '</div></div>'
@@ -77,8 +84,7 @@
 		$('#message').keypress(function(event) {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13') {
-				send();
-
+					send();
 			}
 			event.stopPropagation();
 		});
@@ -95,7 +101,8 @@
 .chat {
 	padding: 0px;
 	width: 100%;
-	height: 550px;
+	height: 600px;
+
 }
 
 .chat .chat-display {
@@ -116,6 +123,10 @@
 	padding: 5px;
 	min-height: 550px;
 	height: 100%
+}
+
+.text-inform{
+	color: #808080;
 }
 
 .message-wrapper {
@@ -149,8 +160,9 @@
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
-#roomname {color
-	
+#roomname {
+
+	float: right;
 }
 
 #message {
@@ -160,9 +172,8 @@
 .text-body {
 	height: 100%
 }
+
 </style>
-
-
 </head>
 <body>
 	<c:set var="nickname"></c:set>
@@ -171,36 +182,24 @@
 
 		<nav id="header" class="navbar navbar-expand-sm navbar-fixed-top">
 			<ul class="navbar-nav ">
-				<li><a href="#">나가기</a></li>
+				<li><a href = "#" id = "exitBtn">나가기</a></li>
 			</ul>
-			<h4 id="roomname">${select}</h4>
+			<h4 id="roomname" >${select}</h4>
 		</nav>
 
 
 		<div class="container-fluid chat" align="center">
 			<div id="chatArea" class="chat chat-display" align="justify">
 				<div id="chatMessageArea" class="chat-text">
-
-					<!-- <div class = "message-wrapper container-fluid" >
-	 				<div class= "message-textbox"></div>
-	 			</div>
-	 		
-	 			<div class = "message-wrapper container-fluid" align="right">
-	 				<div class= "message-textbox"></div>
-	 			</div> -->
 				</div>
 			</div>
+			<input type="hidden" value="${select}" id="select">
 			<input type="hidden" value="${id}" id="nickname">
 		</div>
 	
 		<nav class="navbar navbar-expand-sm navbar-fixed-bottom ">
-		
-
-				<input type="text" id="message" class="textinput"> <input
-					type="button" id="sendBtn" class="btn btn-default btn-sm"
-					value="전송">
-
-	
+			<input type="text" id="message" class="textinput">
+			<input type="button" id="sendBtn" class="btn btn-default btn-sm"value="전송">
 		</nav>
 	</div>
 </body>
