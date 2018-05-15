@@ -194,14 +194,13 @@
 		</div>
 	
 		<nav class="navbar navbar-expand-sm navbar-fixed-bottom ">
-			<div class="text-bottom container-fluid">
-
+		
 
 				<input type="text" id="message" class="textinput"> <input
 					type="button" id="sendBtn" class="btn btn-default btn-sm"
 					value="전송">
 
-			</div>
+	
 		</nav>
 	</div>
 </body>
