@@ -18,7 +18,7 @@
 	function connect() {
 		wsocket = new WebSocket(
 
-		"ws://192.168.0.48:8090/bit/chat?select=" + $("#select").val());
+		"ws://192.168.0.56:8090/bit/chat?select=" + $("#select").val());
 
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
@@ -192,7 +192,6 @@
 			</div>
 			<input type="hidden" value="${id}" id="nickname">
 		</div>
-	
 		<nav class="navbar navbar-expand-sm navbar-fixed-bottom ">
 			<div class="text-bottom container-fluid">
 
