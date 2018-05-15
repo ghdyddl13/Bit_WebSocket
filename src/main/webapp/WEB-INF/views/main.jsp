@@ -56,6 +56,45 @@ th {
 		var popOption = "width=370, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 		window.open(popUrl, "", popOption);
 	}
+	
+	
+
+	var wsocket;
+	
+	var nickname='<%=session.getAttribute("nickname")%>'
+	function connect() {
+		wsocket = new WebSocket(
+	
+		"ws://192.168.0.48:8090/bit/chat?select=Afterlogin");
+	
+		wsocket.onmessage = onMessage;
+	
+	}
+	
+	
+	function onMessage(evt) {
+		var data = evt.data;
+
+		console.log("data" + data);
+		appendMessage(data);
+
+	}
+
+
+
+	function appendMessage(msg) {
+		console.log("append");
+		$("#"+msg+"").append("새로운 대화");
+		
+	}
+
+	$(document).ready(function() {
+
+		connect();
+		
+	});
+	
+	
 </script>
 
 </head>
@@ -102,6 +141,7 @@ th {
 							<td><a  href="javascript:popupOpen(${room.roomno},'${room.roomname}');"> <input
 									type="submit" value="채팅방 입장" id="roombtn" class="btn">
 							</a></td>
+							<td id ="${room.roomno}"></td>
 						</tr>
 
 					</c:forEach>
