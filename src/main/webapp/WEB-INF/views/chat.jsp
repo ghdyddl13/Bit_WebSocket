@@ -16,7 +16,7 @@
 	function connect() {
 		wsocket = new WebSocket(
 
-				"ws://192.168.0.48:8090/bit/chat?select="+$("#select").val());
+				"ws://192.168.0.44:8090/bit/chat?select="+$("#select").val());
 
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
@@ -161,7 +161,7 @@
 <c:set var="nickname" ></c:set>
 <nav id ="header" class="navbar navbar-expand-sm navbar-fixed-top">
  <ul class="navbar-nav ">
-    <li><a href="#">나가기</a> </li>
+    <li><a href="main.htm">나가기</a> </li>
   </ul>
   <h4 id ="roomname">${select}</h4>
 </nav>
