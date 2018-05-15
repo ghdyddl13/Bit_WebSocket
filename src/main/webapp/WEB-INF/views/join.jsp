@@ -53,7 +53,7 @@ $(document).ready( function(){
 		box-shadow: 1px 1px 5px #000;
 		background-color: #e6e6e6;
 		width: 60%;
-		height: 60%;
+		height: 45%;
 	}
 </style>
 </head>
@@ -85,6 +85,8 @@ $(document).ready( function(){
                         <label for="password">Password check</label>
                         <input type="password" id="pwd2" name="pwd2"  placeholder="Please enter your Paasword" type="password" class="form-control" />
                     </div>
+                    <br>
+                    <br>
                     <div class="form-group text-center">
                         <input type="button" id="join_btn" class="btn btn-success btn-login-submit" value="Join" style="float:left">
                         <input type="reset" id="cancel" value="Cancel" class="btn btn-danger btn-cancel-action" style="float:right">
