@@ -38,9 +38,19 @@ result : interface 와 mapper 있으면 실행
  <select id="getRoomList" resultType="kr.co.mycom.model.RoomDto">
   select * from room
  </select>
+	
+ <select id="loginUser" resultType="kr.co.mycom.model.UserDto">
+	select userid,pwd from chatusers where userid=#{param1} and pwd=${param2}
+</select>
 
-
-
+ <insert id="joinUser" parameterType="kr.co.mycom.model.UserDto">
+    insert into chatusers(userid,
+                      pwd)
+      values(
+         #{userid},
+         #{pwd}
+      )
+ </insert>
 
 
 </mapper>
