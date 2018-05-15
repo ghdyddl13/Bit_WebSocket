@@ -52,12 +52,13 @@ th {
 <nav class="navbar navbar-default" id="header">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSocket</a>
+      <a class="navbar-brand" href="index.htm" style="color:white">WebSocket</a>
     </div>
-    <img id="loginimg" alt="" src="https://dopl-egov.commerce.utah.gov/eGov/person%20image.png">
+    
     <ul class="nav navbar-nav">
         <li class="nav-item">
-     		<a class="nav-link" href="#">${nickname}</a>
+     		<a class="nav-link" href="#" style="color:white"> 
+     		<img id="loginimg" alt="" src="https://dopl-egov.commerce.utah.gov/eGov/person%20image.png">${nickname}님</a>
     	</li>
     </ul>
     
