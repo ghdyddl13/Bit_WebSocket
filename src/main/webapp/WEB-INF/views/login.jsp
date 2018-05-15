@@ -16,7 +16,7 @@ $(document).ready( function(){
 	});
 		
  		$('#loginbtn').click(function() {
-			console.log("클릭 화면 뜨니?");
+			console.log("로그인 버튼 클릭!");
 			if($('#userid').val().trim()== "") {
 				alert('아이디를 입력해주세요');
 				$('#userid').val(""); 
@@ -43,17 +43,14 @@ $(document).ready( function(){
 		width: 20px;
 	}
 	#loginbtn {
+		width: 25%;
 		background-color: #3399ff;
 		box-shadow: 1px 1px 5px #000;
 		color: white;
 	}
 	#cancel {
+		width: 25%;
 		background-color: #ff1a1a;
-		box-shadow: 1px 1px 5px #000;
-		color: white;
-	}
-	#join_btn {
-		background-color: #3399ff;
 		box-shadow: 1px 1px 5px #000;
 		color: white;
 	}

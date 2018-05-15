@@ -11,42 +11,85 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready( function(){
-		$(document).on("click", "#join_btn", function(){
-			if($("#pwd").val()!= $("#pwd2").val()){
+ 		$('#join_btn').click(function() {
+			console.log("회원가입 버튼 클릭!");
+			if($('#userid').val().trim()== "") {
+				alert('아이디를 입력해주세요');
+				$('#userid').val(""); 
+                $('#userid').focus();
+			}else if($('#pwd').val().trim()=="") {
+				alert('비밀번호를 입력해주세요');
+				$('#pwd').val(""); 
+				$('#pwd').focus();
+			}else if($("#pwd").val()!= $("#pwd2").val()) {
 				alert("비밀번호가 일치하지 않습니다.");
-				return;
 			}else{
-				$('#frm').submit();
+				$("#frm").submit();
+				alert("회원가입이 완료되었습니다");
 			}
-		
-	});
+		});
 });
 </script>
+<style type="text/css">
+	#header {
+		background-color: #3399ff;
+		box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+	}
+	#join_btn {
+		width: 20%;
+		background-color: #3399ff;
+		box-shadow: 1px 1px 5px #000;
+		color: white;
+	}
+	#cancel {
+		width: 20%;
+		background-color: #ff1a1a;
+		box-shadow: 1px 1px 5px #000;
+		color: white;
+	}
+	#joinbox {
+		text-align:left;
+		margin-top: 10%;
+		box-shadow: 1px 1px 5px #000;
+		background-color: #e6e6e6;
+		width: 60%;
+		height: 60%;
+	}
+</style>
 </head>
+
 <body>
+<nav class="navbar navbar-default" id="header">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.htm" style="color:white">WebSocket</a>
+    </div>
+  </div>
+</nav>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <div class="well login-box">
+        <div class="col-md-12" align="center">
+            <div class="well join-box" id="joinbox">
                 <form action="join.htm" method="post" id="frm">
-                    <legend>회원가입</legend>
+                    <legend>Join</legend><hr>
                     <div class="form-group">
                         <label for="username-email">Userid</label>
                         <input id="userid" name="userid"  placeholder="Please enter your ID" type="text" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="pwd" name="pwd"  placeholder="Please enter your Paasword" type="text" class="form-control" />
+                        <input type="password" id="pwd" name="pwd"  placeholder="Please enter your Paasword" type="password" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label for="password">Password check</label>
-                        <input type="password" id="pwd2" name="pwd2"  placeholder="Please enter your Paasword" type="text" class="form-control" />
+                        <input type="password" id="pwd2" name="pwd2"  placeholder="Please enter your Paasword" type="password" class="form-control" />
                     </div>
                     <div class="form-group text-center">
-                        <button class="btn btn-danger btn-cancel-action">Cancel</button>
+                        <input type="button" id="join_btn" class="btn btn-success btn-login-submit" value="Join" style="float:left">
+                        <input type="reset" id="cancel" value="Cancel" class="btn btn-danger btn-cancel-action" style="float:right">
                         <!-- <input type="submit" class="btn btn-success btn-login-submit" value="join" /> -->
-                        <button type="button" id="join_btn" class="btn btn-success btn-login-submit" >Join</button>
+
                     </div>
                 </form>
             </div>
