@@ -60,22 +60,25 @@ th {
 
 </head>
 <body>
-	<nav class="navbar navbar-default" id="header">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">WebSocket</a>
-			</div>
-			<img id="loginimg" alt=""
-				src="https://dopl-egov.commerce.utah.gov/eGov/person%20image.png">
-			<ul class="nav navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">${nickname}</a>
-				</li>
-			</ul>
 
-		</div>
-	</nav>
+<nav class="navbar navbar-default" id="header">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.htm" style="color:white">WebSocket</a>
+    </div>
+    
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+     		<a class="nav-link" href="#" style="color:white"> 
+     		<img id="loginimg" alt="" src="https://dopl-egov.commerce.utah.gov/eGov/person%20image.png">${nickname}님</a>
+    	</li>
+    </ul>
+    
+  </div>
+</nav>
 
-	<br>
+	<br>	
+
 	<div align="center">
 		<c:set var="list" value="${requestScope.list}"></c:set>
 		<div>

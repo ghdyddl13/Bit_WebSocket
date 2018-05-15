@@ -16,9 +16,7 @@
 	var wsocket;
 	var nickname;
 	function connect() {
-		wsocket = new WebSocket(
-
-		"ws://192.168.0.48:8090/bit/chat?select=" + $("#select").val());
+		wsocket = new WebSocket("ws://192.168.0.44:8090/bit/chat?select="+$("#select").val());
 
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
@@ -165,32 +163,23 @@
 
 </head>
 <body>
+
 	<c:set var="nickname"></c:set>
 
 	<div class="text-body">
-
 		<nav id="header" class="navbar navbar-expand-sm navbar-fixed-top">
 			<ul class="navbar-nav ">
 				<li><a href="#">나가기</a></li>
 			</ul>
 			<h4 id="roomname">${select}</h4>
 		</nav>
-
-
 		<div class="container-fluid chat" align="center">
 			<div id="chatArea" class="chat chat-display" align="justify">
 				<div id="chatMessageArea" class="chat-text">
-
-					<!-- <div class = "message-wrapper container-fluid" >
-	 				<div class= "message-textbox"></div>
-	 			</div>
-	 		
-	 			<div class = "message-wrapper container-fluid" align="right">
-	 				<div class= "message-textbox"></div>
-	 			</div> -->
 				</div>
 			</div>
 			<input type="hidden" value="${id}" id="nickname">
+
 		</div>
 	
 		<nav class="navbar navbar-expand-sm navbar-fixed-bottom ">
