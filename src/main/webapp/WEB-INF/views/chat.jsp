@@ -182,7 +182,7 @@
 			<ul class="navbar-nav ">
 				<li><a href = "#" id = "exitBtn">나가기</a></li>
 			</ul>
-			<h4 id="roomname" >${select}</h4>
+			<h4 id="roomname" >${roomname}</h4>
 		</nav>
 		<div class="container-fluid chat" align="center">
 			<div id="chatArea" class="chat chat-display" align="justify">

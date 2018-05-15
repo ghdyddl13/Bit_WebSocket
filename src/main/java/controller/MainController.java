@@ -64,13 +64,14 @@ public class MainController {
 	}
 	
 	@RequestMapping("chat.htm")
-	public String chat(String id, String select, Model model, HttpServletRequest request) {
+	public String chat(String roomname, String select, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.getAttribute("nickname");
 		
-		System.out.println(id +"///"+ select);
+		
 		model.addAttribute("id", session.getAttribute("nickname"));
 		model.addAttribute("select", select);
+		model.addAttribute("roomname", roomname);
 		return "chat";
 	}
 	

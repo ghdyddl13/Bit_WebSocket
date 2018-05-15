@@ -51,8 +51,8 @@ th {
 </style>
 
 <script type="text/javascript">
-	function popupOpen(roomno) {
-		var popUrl = "chat.htm?select="+roomno; //팝업창에 출력될 페이지 URL
+	function popupOpen(roomno,roomname) {
+		var popUrl = "chat.htm?select="+roomno+"&roomname="+roomname; //팝업창에 출력될 페이지 URL
 		var popOption = "width=370, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 		window.open(popUrl, "", popOption);
 	}
@@ -99,7 +99,7 @@ th {
 						<tr>
 							<td><input type="hidden" value="${room.roomno}">${room.roomname}</td>
 
-							<td><a  href="javascript:popupOpen(${room.roomno});"> <input
+							<td><a  href="javascript:popupOpen(${room.roomno},'${room.roomname}');"> <input
 									type="submit" value="채팅방 입장" id="roombtn" class="btn">
 							</a></td>
 						</tr>
