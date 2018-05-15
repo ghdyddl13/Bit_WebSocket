@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -24,7 +25,7 @@ public class Chat extends TextWebSocketHandler {
 		// 입장한 채팅방 이름 꺼내와 변수에 저장 
 		String chatname = getCurrentChatRoom(session);
 		System.out.println("입장한 채팅방 = " + chatname);
-
+		System.out.println("sessionid : " + session.getId());
 		//채팅방이 기존에 존재했던 방인지에 대한 유무 검증
 		if (usermap.containsKey(chatname)) { //기존에 존재해 Map에 저장되어 있었다면,
 			usermap.get(chatname).put(session.getId(),session); // 클라이언트 session값 저장
@@ -36,6 +37,16 @@ public class Chat extends TextWebSocketHandler {
 			list.put(session.getId(),session); // 클라이언트의 sessionId와 session 객체를 Map에 저장한 후
 			usermap.put(chatname, (HashMap<String, WebSocketSession>) list); // usermap에 Put함으로써 새로운 채팅방 생성
 		}
+		
+		String userid = getNickName(session);
+		String inform= "알림|" +userid+ "님이 입장하였습니다.";
+		System.out.println(inform);
+		TextMessage msg = new TextMessage(inform);
+		for(Map.Entry m : usermap.get(chatname).entrySet()) { // 메시지가 입력된 채팅방에 있는 클라이언트에게만 메시지 전송
+			WebSocketSession sess = (WebSocketSession) m.getValue();
+			sess.sendMessage(msg);
+		}
+		
 	}
 
 	@Override
@@ -53,17 +64,24 @@ public class Chat extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		
+		
 		// 입장한 채팅방 이름 꺼내와 변수에 저장 
 		String chatname = getCurrentChatRoom(session);
+		String userid = getNickName(session);
+		String inform= "알림|" +userid+ "님이 퇴장하였습니다.";
+		TextMessage msg = new TextMessage(inform);
+		
+		for(Map.Entry m : usermap.get(chatname).entrySet()) { // 메시지가 입력된 채팅방에 있는 클라이언트에게만 메시지 전송
+			WebSocketSession sess = (WebSocketSession) m.getValue();
+			sess.sendMessage(msg);
+		}
+		// session종료시키기
 		usermap.get(chatname).remove(session.getId());  // 채팅방에서 클라이언트라 접속을 끊으면, 참여중인 목록에서 session을 삭제한 후
 		session.close();
 		
 		
-		// session종료시키기
 	}
-	@Override
-	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {	
-	}
+
 	
 	
 	//채팅방의 정보를 받아오는 함수 
@@ -73,6 +91,12 @@ public class Chat extends TextWebSocketHandler {
 		return (String) map.get("select");
 	}
 	
-
-
+	//채팅방의 정보를 받아오는 함수 
+	public String getNickName(WebSocketSession session) {
+		Map<String, Object> map = session.getAttributes();
+		
+		return (String) map.get("nickname");
+	}
+	
+	
 }

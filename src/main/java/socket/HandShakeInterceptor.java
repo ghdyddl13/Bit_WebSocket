@@ -22,7 +22,7 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
     	HttpServletRequest req= ssreq.getServletRequest();
         System.out.println("Before Handshake");
         System.out.println(req.getParameter("select"));
-      
+       
         // 파라미터로 입력된 attributes에 put을 하면 
         // WebSocketSession에 자동으로 저장되어 Chat class에서 활용 가능
         attributes.put("select", req.getParameter("select"));
