@@ -15,7 +15,9 @@
 	var nickname;
 	function connect() {
 		wsocket = new WebSocket(
+
 				"ws://192.168.0.48:8090/bit/chat?select="+$("#select").val());
+
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
