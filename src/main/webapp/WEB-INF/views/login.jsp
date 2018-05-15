@@ -14,9 +14,45 @@ $(document).ready( function(){
 		$(document).on("click", "#join_btn", function(){
 		$('#frm').submit();
 	});
-});
-</script>
+		
+ 		$('#loginbtn').click(function() {
+			console.log("클릭 화면 뜨니?");
+			if($('#userid').val().trim()== "") {
+				alert('아이디를 입력해주세요');
+				$('#userid').val(""); 
+                $('#userid').focus();
+			}else if($('#pwd').val().trim()=="") {
+				alert('비밀번호를 입력해주세요');
+				$('#pwd').val(""); 
+				$('#pwd').focus();   
+			}else{
+				$("#login").submit();
+			}
+		});
+		
 
+});
+	
+</script>
+<style type="text/css">
+	#loginbtn {
+		background-color: #3399ff;
+		box-shadow: 1px 1px 5px #000;
+		color: white;
+	}
+	#cancel {
+		background-color: #ff1a1a;
+		box-shadow: 1px 1px 5px #000;
+		color: white;
+	}
+	#join_btn {
+		background-color: #3399ff;
+		box-shadow: 1px 1px 5px #000;
+		color: white;
+	}
+
+	
+</style>
 </head>
 <body>
 
@@ -24,19 +60,19 @@ $(document).ready( function(){
     <div class="row">
         <div class="col-md-12">
             <div class="well login-box">
-                <form action="login.htm" method="post">
-                    <legend>로그인</legend>
+                <form action="login.htm" method="post" id="login">
+                    <legend>Login</legend>
                     <div class="form-group">
                         <label for="username-email">Userid</label>
                         <input id="userid" name="userid"  placeholder="Please enter your ID" type="text" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input id="pwd" name="pwd"  placeholder="Please enter your Paasword" type="text" class="form-control" />
+                        <input id="pwd" name="pwd"  placeholder="Please enter your Paasword" type="password" class="form-control" />
                     </div>
                     <div class="form-group text-center">
-                        <button class="btn btn-danger btn-cancel-action">Cancel</button>
-                        <input type="submit" class="btn btn-success btn-login-submit" value="login" />
+                    	<input type="button" id="loginbtn" class="btn btn-success btn-login-submit" value="login" />
+                        <button id="cancel" class="btn btn-danger btn-cancel-action">Cancel</button>
                         <button type="button" id="join_btn" class="btn btn-success btn-login-submit">Join</button>
                          
                     </div>
