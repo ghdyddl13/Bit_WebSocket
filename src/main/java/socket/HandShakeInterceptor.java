@@ -19,16 +19,14 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
             Map<String, Object> attributes) throws Exception {
     	
     	ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
-
-    	
     	HttpServletRequest req= ssreq.getServletRequest();
         System.out.println("Before Handshake");
         System.out.println(req.getParameter("select"));
-        
+      
         // 파라미터로 입력된 attributes에 put을 하면 
         // WebSocketSession에 자동으로 저장되어 Chat class에서 활용 가능
         attributes.put("select", req.getParameter("select"));
-     
+        attributes.put("nickname", req.getSession().getAttribute("nickname"));
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
   
