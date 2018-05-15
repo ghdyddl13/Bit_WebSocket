@@ -40,7 +40,9 @@
 	
 	function send() {
 		var msg = $("#message").val();
+
 		wsocket.send(nickname+"|" + msg);
+
 		$("#message").val("");
 	}
 
