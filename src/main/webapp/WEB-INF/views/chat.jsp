@@ -15,7 +15,7 @@
 	var nickname;
 	function connect() {
 		wsocket = new WebSocket(
-				"ws://192.168.0.26:8090/bit/chat?select="+$("#select").val());
+				"ws://192.168.0.48:8090/bit/chat?select="+$("#select").val());
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
@@ -50,11 +50,11 @@
 		var msgbox;
 		if(sendusernickname == nickname){
 			msgbox ='<div class = "message-wrapper container-fluid" align="right">'
-			msgbox +='<div class= "message-textbox .mymessage"  align="left">'+message+'</div></div>'
+			msgbox +='<div class= "message-textbox mymessage"  align="left">'+message+'</div></div>'
 		} else{
-			msgbox ='<div class = "message-wrapper container-fluid">'+nickname
+			msgbox ='<div class = "message-wrapper container-fluid">'+sendusernickname
 			
-			msgbox +='<br><div class= "message-textbox">'+message+'</div></div>'
+			msgbox +='<br><div class= "message-textbox othermessage">'+message+'</div></div>'
 		}	
 		$("#chatMessageArea").append(msgbox);
 		var chatAreaHeight = $("#chatArea").height();
@@ -111,7 +111,7 @@
 	}
 	
 	.message-textbox{
-		background-color: white;
+		
 		border-radius: 5px;
 		box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 		max-width:70%;
@@ -126,7 +126,11 @@
             text-overflow: ellipsis;
 	}
 	
-	.message-textbox .mymessage{
+	.othermessage{
+		background-color: white;
+	}
+	
+	.mymessage{
 			background-color: yellow;
 	}
 		
@@ -152,9 +156,10 @@
 <body>
 <c:set var="nickname" ></c:set>
 <nav id ="header" class="navbar navbar-expand-sm navbar-fixed-top">
- <ul class="navbar-nav">
-    <li><h4 id ="roomname">${select}</h4></li>
+ <ul class="navbar-nav ">
+    <li><a href="#">나가기</a> </li>
   </ul>
+  <h4 id ="roomname">${select}</h4>
 </nav>
 
 
@@ -171,9 +176,7 @@
  			</div> -->
  		</div>
  	</div>
- 	<input type = "hidden" value= "${select}" id ="select">
 	<input type = "hidden" value= "${id}" id ="nickname">
-	 
 	<div class = "text-bottom row">
 		<div class= "col-sm-11">
 			<input type ="text" id ="message" class ="textinput">	
