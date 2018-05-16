@@ -74,7 +74,7 @@ th {
 	function connect() {
 		wsocket = new WebSocket(
 	
-		"ws://192.168.0.48:8090/bit/login");
+		"ws://192.168.0.43:8090/bit/login");
 	
 		wsocket.onmessage = onMessage;
 	
