@@ -41,6 +41,12 @@
 			<beans:bean class="socket.HandShakeInterceptor"></beans:bean>
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
+	
+	<websocket:handlers>
+		<websocket:mapping handler="login" path="/login" />
 
-	<beans:bean id="chat" class="socket.Chat"></beans:bean>
+	</websocket:handlers>
+	
+	<beans:bean id="login" class="socket.LoginSocketHandler"></beans:bean>
+	<beans:bean id="chat" class="socket.ChatSocketHandler"></beans:bean>
 </beans:beans>

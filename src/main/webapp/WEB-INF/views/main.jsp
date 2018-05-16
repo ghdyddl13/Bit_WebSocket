@@ -65,7 +65,7 @@ th {
 	function connect() {
 		wsocket = new WebSocket(
 	
-		"ws://192.168.0.48:8090/bit/chat?select=Afterlogin");
+		"ws://192.168.0.48:8090/bit/login");
 	
 		wsocket.onmessage = onMessage;
 	

@@ -11,12 +11,12 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-public class Chat extends TextWebSocketHandler {
+public class ChatSocketHandler extends TextWebSocketHandler {
 	
 	// 구조 
 	// Map<채팅방 이름, HashMap<참여자 sessionId, 참여자 session 객체>>
-	private Map<String, HashMap<String,WebSocketSession>> usermap = new HashMap();
-	private Map<String, WebSocketSession> alarmusers = new HashMap();
+	private Map<String, HashMap<String,WebSocketSession>> usermap = SessionMaps.getUserMap();
+	private Map<String, WebSocketSession> alarmusers = SessionMaps.getAlarmusers();
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -26,13 +26,9 @@ public class Chat extends TextWebSocketHandler {
 		String chatname = getCurrentChatRoom(session);
 		System.out.println("입장한 채팅방 = " + chatname);
 		System.out.println("sessionid : " + session.getId());
-		
-		if(chatname.equals("Afterlogin")) { //로그인 한 SESSION인 경우
-			System.out.println("로그인했어요");
-			alarmusers.put(session.getId(), session); 
-		} else { // 채팅방에 들어가는 SESSION인 경우
+	
 			//채팅방이 기존에 존재했던 방인지에 대한 유무 검증
-			if (usermap.containsKey(chatname)) { //기존에 존재해 Map에 저장되어 있었다면,
+			if (SessionMaps.getUserMap().containsKey(chatname)) { //기존에 존재해 Map에 저장되어 있었다면,
 				usermap.get(chatname).put(session.getId(),session); // 클라이언트 session값 저장
 				System.out.println("채팅방 존재했음");
 				
@@ -52,7 +48,7 @@ public class Chat extends TextWebSocketHandler {
 				sess.sendMessage(msg);
 			}
 		
-		}
+		
 		
 		
 	}
