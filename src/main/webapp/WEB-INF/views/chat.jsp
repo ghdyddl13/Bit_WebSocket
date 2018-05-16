@@ -15,7 +15,7 @@
 <script type="text/javascript">
 	var wsocket;
 	
-	var nickname = "<%=session.getAttribute("nickname")%>"
+	var nickname='<%=session.getAttribute("nickname")%>'
 	function connect() {
 		wsocket = new WebSocket(
 	
@@ -26,7 +26,7 @@
 	}
 	function disconnect() {
 		wsocket.close();
-		window.close();
+		
 	}
 	function onOpen(evt) {
 	}
@@ -42,6 +42,7 @@
 	}
 
 	function send() {
+		console.log("nickname :" +nickname);
 		var msg = $("#message").val();
 		if(msg.trim()!=""){
 			wsocket.send(nickname + "|" + msg);
@@ -77,7 +78,7 @@
 	}
 
 	$(document).ready(function() {
-		nickname = $("#nickname").val();
+
 		connect();
 		$('#message').keypress(function(event) {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -91,6 +92,7 @@
 		});
 		$('#exitBtn').click(function() {
 			disconnect();
+			window.close();
 		});
 	});
 </script>
@@ -174,9 +176,6 @@
 </style>
 </head>
 <body>
-
-	<c:set var="nickname"></c:set>
-
 	<div class="text-body">
 		<nav id="header" class="navbar navbar-expand-sm navbar-fixed-top">
 			<ul class="navbar-nav ">
@@ -190,8 +189,6 @@
 				</div>
 			</div>
 			<input type="hidden" value="${select}" id="select">
-			<input type="hidden" value="${id}" id="nickname">
-
 		</div>
 	
 		<nav class="navbar navbar-expand-sm navbar-fixed-bottom ">

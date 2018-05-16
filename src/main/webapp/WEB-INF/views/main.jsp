@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script
@@ -48,14 +49,63 @@ th {
 	height: 20px;
 	width: 20px;
 }
+
+.fa-commenting{
+ color:red;
+}
+
+
+
 </style>
 
 <script type="text/javascript">
 	function popupOpen(roomno,roomname) {
 		var popUrl = "chat.htm?select="+roomno+"&roomname="+roomname; //팝업창에 출력될 페이지 URL
 		var popOption = "width=370, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+		$("#"+roomno+"").empty();
 		window.open(popUrl, "", popOption);
 	}
+	
+	
+
+	var wsocket;
+	
+	var nickname='<%=session.getAttribute("nickname")%>'
+	function connect() {
+		wsocket = new WebSocket(
+	
+		"ws://192.168.0.43:8090/bit/login");
+	
+		wsocket.onmessage = onMessage;
+	
+	}
+	
+	
+	function onMessage(evt) {
+		var data = evt.data;
+
+		console.log("data" + data);
+		appendMessage(data);
+
+	}
+
+
+
+	function appendMessage(msg) {
+		console.log("append");
+		$("#"+msg+"").empty();
+		
+		$("#"+msg+"").append('<i class="fa fa-commenting"></i>');
+		
+	}
+
+	$(document).ready(function() {
+
+		connect();
+		
+	});
+	
+	
 </script>
 
 </head>
@@ -93,6 +143,7 @@ th {
 					<tr>
 						<th>채팅방이름</th>
 						<th>비고</th>
+						<th></th>
 					</tr>
 					<c:forEach var="room" items="${list}">
 
@@ -102,6 +153,7 @@ th {
 							<td><a  href="javascript:popupOpen(${room.roomno},'${room.roomname}');"> <input
 									type="submit" value="채팅방 입장" id="roombtn" class="btn">
 							</a></td>
+							<td id ="${room.roomno}"></td>
 						</tr>
 
 					</c:forEach>
